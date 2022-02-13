@@ -21,7 +21,7 @@ func init() {
 	Db, _ = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	Rdb = redis.NewClient(&redis.Options{
 		Addr:     "localhost:6379",
-		Password: "",
+		Password: "lifehappy01",
 		DB:       0,
 	})
 
@@ -62,13 +62,13 @@ create table member (
 create table student (
     student_id bigint primary key,
     student_name varchar(30) not null unique,
-    foreign key (student_id) references member(userid)
+    foreign key (student_id) references member(user_id)
 )default charset utf8;
 
 create table teacher (
     teacher_id bigint primary key,
     teacher_name varchar(30) not null unique,
-    foreign key (teacher_id) references member(userid)
+    foreign key (teacher_id) references member(user_id)
 )default charset utf8;
 
 create table course (

@@ -12,7 +12,7 @@ import (
 // StudentNotExisted  ErrNo = 11 // 学生不存在
 // StudentHasNoCourse ErrNo = 13 // 学生没有课程
 
-func Course(c *gin.Context) { //api/v1/student/course
+func Course(c *gin.Context) { // /api/v1/student/course
 	var req types.GetStudentCourseRequest
 	var res types.GetStudentCourseResponse
 	c.BindQuery(&req)

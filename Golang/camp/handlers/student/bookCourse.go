@@ -18,9 +18,10 @@ func BookCourse(c *gin.Context) { // /api/v1/student/book_course
 	var req types.BookCourseRequest
 	var res types.BookCourseResponse
 	c.BindJSON(&req)
-	if model.Rdb.TTL(model.Ctx, req.StudentID).Val().String()[:2] == "-2" { // 是否存在该学生
+	// fmt.Println(req.StudentID, req.CourseID, model.Rdb.TTL(model.Ctx, req.StudentID).Val().String()[:2])
+	if model.Rdb.TTL(model.Ctx, fmt.Sprintf("studentcourse%s", req.StudentID)).Val().String()[:2] == "-2" { // 是否存在该学生
 		res.Code = types.StudentNotExisted
-	} else if model.Rdb.TTL(model.Ctx, req.CourseID).Val().String()[:2] == "-2" { // 是否存在该课程
+	} else if model.Rdb.TTL(model.Ctx, fmt.Sprintf("course%s", req.CourseID)).Val().String()[:2] == "-2" { // 是否存在该课程
 		res.Code = types.CourseNotExisted // 学生是否已经选择该课程
 	} else if model.Rdb.SIsMember(model.Ctx, fmt.Sprintf("studentcourse%s", req.StudentID), req.CourseID).Val() {
 		res.Code = types.StudentHasCourse
