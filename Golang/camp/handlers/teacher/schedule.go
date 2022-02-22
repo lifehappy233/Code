@@ -85,7 +85,7 @@ func Schedule(c *gin.Context) { // /api/v1/course/schedule
 	calc.calc()
 
 	var res types.ScheduleCourseResponse
-
+	res.Data = make(map[string]string)
 	for i := 0; i < calc.m; i++ {
 		if calc.pair[i] != -1 {
 			res.Data[teachers[calc.pair[i]]] = courses[i]
