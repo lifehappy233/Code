@@ -2,35 +2,41 @@
 
 using namespace std;
 
-class Solution {
-private:
-  void get(int &a, int &b, string str) {
-    int n = str.size(), cur = 0, f = 1;
-    while (str[cur] != '+') {
-      if (str[cur] == '-') {
-        f = -1;
-      }
-      a = a * 10 + str[cur++] - '0';
-    }
-    a = a * f;
-    cur++, f = 1;
-    while (cur < n) {
-      if (str[cur] == '-') {
-        f = -1;
-      }
-      b = b * 10 + str[cur++] - '0';
-    }
-    b = b * f;
-  }
+const int N = 1e6 + 10;
 
-public:
-  string complexNumberMultiply(string num1, string num2) {
-    int a = 0, b = 0, c = 0, d = 0;
-    get(a, b, num1);
-    get(c, d, num2);
+int sum[N], n, m;
+
+bool judge() {
+  for (int i = 1; i <= m; i++) {
+    if (sum[i] == sum[i - 1]) {
+      continue;
+    }
+    for (int j = i; j <= m; j += i) {
+      int l = j, r = min(m, j + i - 1), k = j / i;
+      if ((sum[r] - sum[l - 1]) && !(sum[k] - sum[k - 1])) {
+        return false;
+      }
+    }
   }
-};
+  return true;
+}
 
 int main() {
+  int T;
+  scanf("%d", &T);
+  while (T--) {
+    scanf("%d %d", &n, &m);
+    for (int i = 1, x; i <= n; i++) {
+      scanf("%d", &x);
+      sum[x]++;
+    }
+    for (int i = 1; i <= m; i++) {
+      sum[i] += sum[i - 1];
+    }
+    puts(judge() ? "Yes" : "No");
+    for (int i = 1; i <= m; i++) {
+      sum[i] = 0;
+    }
+  }
   return 0;
 }
