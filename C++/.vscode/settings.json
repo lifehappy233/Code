@@ -3,6 +3,10 @@
     "socket.h": "c",
     "functional": "cpp",
     "unistd.h": "c",
-    "cstring": "c"
+    "cstring": "c",
+    "complex": "cpp",
+    "atomic": "cpp",
+    "chrono": "cpp",
+    "string": "cpp"
   }
 }

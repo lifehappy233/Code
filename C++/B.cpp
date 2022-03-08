@@ -16,13 +16,18 @@ private:
   double re, im;
 };
 
+std::ostream& operator << (std::ostream& os, const complex &x) {
+  return os << "(" << x.real() << ", " << x.image() << ")";
+}
+
 int main() {
   complex a(1.0, 1.0);
+  
   const complex b(2.0, 2.0);
 
-  std::cout << a.real() << " " << a.image() << std::endl;
+  std::cout << a << std::endl;
 
-  std::cout << b.real() << " " << b.image() << std::endl;
+  std::cout << b << std::endl;
 
   return 0;
 }
